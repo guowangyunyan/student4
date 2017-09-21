@@ -9,11 +9,13 @@ public interface StudentService {
 
 	void deleteStudentByStudentId(String studentIdStr);
 
-	void add(String studentName, String ageStr, String grade, String sexStr, String birthday, String createDate);
+	void add(String studentName, String ageStr, String grade, String sexStr, String birthday);
 
 	void updateStudentByStudentId(String studentIdStr, String studentName, String grade, String ageStr, String sexStr,
-			String birthday, String updateDate);
+			String birthday);
 
 	Student queryStudentByStudentId(String studentIdStr);
+
+	Page<Student> queryStudentWithPage(String studentName, int sex, int currentPage, int pageSize);
 
 }

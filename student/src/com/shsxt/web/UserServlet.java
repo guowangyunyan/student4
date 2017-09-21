@@ -59,6 +59,7 @@ public class UserServlet extends HttpServlet {
 			}
 		}
 		response.sendRedirect("login.jsp");
+		return;
 	}
 
 	private void register(HttpServletRequest request, HttpServletResponse response) {
@@ -70,7 +71,7 @@ public class UserServlet extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		String remember = request.getParameter("remember");
 		ResultInfo<User> result = new ResultInfo<User>();
-		if (StringUtil.isEmpty(uname) && StringUtil.isEmpty(pwd)) {
+		if (!StringUtil.isEmpty(uname) && !StringUtil.isEmpty(pwd)) {
 			User user = new User();
 			user.setUname(uname);
 			user.setPwd(pwd);
@@ -83,7 +84,7 @@ public class UserServlet extends HttpServlet {
 					cookie.setMaxAge(60 * 60 * 24 * 3);
 					response.addCookie(cookie);
 				}
-				response.sendRedirect("student?option=");
+				response.sendRedirect("student?act=");
 				return;
 			} else {
 				request.setAttribute("msg", result.getMsg());

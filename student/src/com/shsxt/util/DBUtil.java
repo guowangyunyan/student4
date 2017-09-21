@@ -10,7 +10,7 @@ public class DBUtil {
 	public static Connection getConn() {
 		Connection conn = null;
 		try {
-			Class.forName(PropertiesUtil.get("jdbcName"));
+			Class.forName(PropertiesUtil.get("jdbcname"));
 			conn = DriverManager.getConnection(PropertiesUtil.get("dbUrl"), PropertiesUtil.get("dbUserName"),
 					PropertiesUtil.get("dbPassword"));
 		} catch (ClassNotFoundException e) {

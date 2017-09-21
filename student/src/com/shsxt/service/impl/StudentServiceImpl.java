@@ -3,7 +3,7 @@ package com.shsxt.service.impl;
 import java.util.List;
 
 import com.shsxt.dao.StudentDao;
-import com.shsxt.dao.impl.StudnetDaoImpl;
+import com.shsxt.dao.impl.StudentDaoImpl;
 import com.shsxt.entity.Page;
 import com.shsxt.entity.Student;
 import com.shsxt.service.StudentService;
@@ -12,17 +12,17 @@ public class StudentServiceImpl implements StudentService {
 	private StudentDao studentDao;
 
 	public StudentServiceImpl() {
-		studentDao = new StudnetDaoImpl();
+		studentDao = new StudentDaoImpl();
 	}
 
 	@Override
 	public Page<Student> queryAllStudentWithPage(int currentPage, int pageSize) {
 		List<Student> list = studentDao.queryAll();
 		int totalRecord = list.size();
-		Page<Student> students = new Page<Student>(currentPage, pageSize, totalRecord);
-		int startPage = (currentPage - 1) * pageSize;
-		students.setList(studentDao.queryAllStudent(startPage, pageSize));
-		return students;
+		Page<Student> page = new Page<Student>(currentPage, pageSize, totalRecord);
+		int startIndex = (currentPage - 1) * pageSize;
+		page.setList(studentDao.queryAllStudent(startIndex, pageSize));
+		return page;
 	}
 
 	@Override
@@ -32,11 +32,10 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void add(String studentName, String ageStr, String grade, String sexStr, String birthday,
-			String createDate) {
+	public void add(String studentName, String ageStr, String grade, String sexStr, String birthday) {
 		int age = Integer.parseInt(ageStr);
 		int sex = Integer.parseInt(sexStr);
-		studentDao.add(studentName, age, grade, sex, birthday, createDate);
+		studentDao.add(studentName, age, grade, sex, birthday);
 	}
 
 	@Override
@@ -48,12 +47,22 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void updateStudentByStudentId(String studentIdStr, String studentName, String grade, String ageStr,
-			String sexStr, String birthday, String updateDate) {
+			String sexStr, String birthday) {
 		int studentId = Integer.parseInt(studentIdStr);
 		int age = Integer.parseInt(ageStr);
 		int sex = Integer.parseInt(sexStr);
-		studentDao.updateStudentByStudentId(studentId, studentName, age, sex, grade, birthday, updateDate);
+		studentDao.updateStudentByStudentId(studentId, studentName, age, sex, grade, birthday);
 
+	}
+
+	@Override
+	public Page<Student> queryStudentWithPage(String studentName, int sex, int currentPage, int pageSize) {
+		List<Student> students = studentDao.queryStudentTotalRecord(studentName, sex);
+		int totalRecord = students.size();
+		Page<Student> page = new Page<Student>(currentPage, pageSize, totalRecord);
+		int startIndex = page.getStartIndex();
+		page.setList(studentDao.queryStudent(studentName, sex, startIndex, pageSize));
+		return page;
 	}
 
 }
