@@ -6,6 +6,7 @@ public class Student {
 	private Integer studentId;
 	private String StudentName;
 	private Integer age;
+	private Integer sex;
 	private String grade;
 	private Date birthday;
 	private Date createDate;
@@ -34,6 +35,14 @@ public class Student {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
 	}
 
 	public String getGrade() {
