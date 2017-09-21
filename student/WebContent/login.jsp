@@ -17,7 +17,7 @@
 		remember:<input name="remember" type="checkbox"><br>
 		<input value="login" type="submit" onclick="checkLogin()">
 		<input value="取消" type="reset"><br>
-	
+		<span ${msg }></span>
 	</form>
 	<a href="register.jsp">register</a>
 </body>
