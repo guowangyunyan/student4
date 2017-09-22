@@ -21,6 +21,9 @@ public class StudentServiceImpl implements StudentService {
 		int totalRecord = list.size();
 		Page<Student> page = new Page<Student>(currentPage, pageSize, totalRecord);
 		int startIndex = (currentPage - 1) * pageSize;
+		if (startIndex < 0) {
+			startIndex = 0;
+		}
 		page.setList(studentDao.queryAllStudent(startIndex, pageSize));
 		return page;
 	}

@@ -99,7 +99,7 @@ public class StudentServlet extends HttpServlet {
 		String ageStr = request.getParameter("age");
 		String grade = request.getParameter("grade");
 		String sexStr = request.getParameter("sex");
-		String birthday = request.getParameter("birthday");
+		String birthday = request.getParameter("birthday").trim();
 		studentService.add(studentName, ageStr, grade, sexStr, birthday);
 		request.getRequestDispatcher("student?act=").forward(request, response);
 	}
@@ -116,7 +116,7 @@ public class StudentServlet extends HttpServlet {
 		int currentPage = Integer.parseInt(currentPageStr);
 		int pageSize = Integer.parseInt(pageSizeStr);
 		Page<Student> page = studentService.queryAllStudentWithPage(currentPage, pageSize);
-		request.setAttribute("sex", 2);
+
 		request.setAttribute("page", page);
 		request.getRequestDispatcher("main.jsp").forward(request, response);
 	}

@@ -123,20 +123,21 @@ public class StudentDaoImpl implements StudentDao {
 		sql.append(" INSERT INTO t_student ");
 		sql.append(" (student_name,age,sex,grade,birthday,create_date,is_available ) ");
 		sql.append(" VALUES(?,?,?,?,?,?,?) ");
+
 		PreparedStatement ps = DBUtil.getPreparedStatement(conn, sql.toString());
 		try {
 			ps.setString(1, studentName);
 			ps.setInt(2, age);
-			ps.setString(3, grade);
-			ps.setInt(4, sex);
+			ps.setInt(3, sex);
+			ps.setString(4, grade);
 			Date date = null;
 			try {
-				date = new SimpleDateFormat("yyyy/MM/dd").parse(birthday);
+				date = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ps.setDate(5, (java.sql.Date) date);
+			ps.setDate(5, new java.sql.Date(date.getTime()));
 			ps.setTimestamp(6, new Timestamp(new Date().getTime()));
 			ps.setInt(7, 1);
 			ps.executeUpdate();
@@ -197,7 +198,8 @@ public class StudentDaoImpl implements StudentDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update t_student ");
 		sql.append(" set student_name=?,age=?,grade=?,sex=?,birthday=?,update_date=? ");
-		sql.append(" where is_available=1 student_id=? ");
+		sql.append(" where is_available=1 and student_id=? ");
+
 		PreparedStatement ps = DBUtil.getPreparedStatement(conn, sql.toString());
 		try {
 			ps.setString(1, studentName);
@@ -214,6 +216,7 @@ public class StudentDaoImpl implements StudentDao {
 			ps.setDate(5, (java.sql.Date) date);
 			ps.setTimestamp(6, new Timestamp(new Date().getTime()));
 			ps.setInt(7, studentId);
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -333,7 +336,7 @@ public class StudentDaoImpl implements StudentDao {
 				student.setStudentId(rs.getInt("student_id"));
 				student.setStudentName(rs.getString("student_name"));
 				student.setAge(rs.getInt("age"));
-				student.setBirthday(rs.getTimestamp("birthday"));
+				student.setBirthday(rs.getDate("birthday"));
 				student.setSex(rs.getInt("sex"));
 				student.setGrade(rs.getString("grade"));
 				student.setCreateDate(rs.getTimestamp("create_date"));

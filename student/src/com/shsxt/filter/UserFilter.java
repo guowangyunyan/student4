@@ -35,12 +35,12 @@ public class UserFilter implements Filter {
 			User user = (User) session.getAttribute("user");
 			if (user != null) {
 				chain.doFilter(req, resp);
+			} else {
+				String msg = "请先登录";
+				req.setAttribute("msg", msg);
+				req.getRequestDispatcher("login.jsp").forward(req, resp);
+				return;
 			}
-
-			String msg = "请先登录";
-			req.setAttribute("msg", msg);
-			req.getRequestDispatcher("login.jsp").forward(req, resp);
-			return;
 		}
 
 	}

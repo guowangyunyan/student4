@@ -11,7 +11,7 @@
 	<hr>
 	<a href="student">返回学生列表</a>
 	<hr>
-	<form action="student?act=" method="post">
+	<form action="student" method="post">
 		<input type="hidden" name="act" value="add"> 
 		姓名:<input type="text" name="name"><br> 
 		年龄:<input type="text" name="age"><br> 

@@ -81,8 +81,7 @@ public class UserServlet extends HttpServlet {
 					cookie.setMaxAge(60 * 60 * 24 * 3);
 					response.addCookie(cookie);
 				}
-				response.sendRedirect("student");
-				return;
+				request.getRequestDispatcher("student").forward(request, response);
 			} else {
 				request.setAttribute("msg", "用户名或密码错误");
 				request.getRequestDispatcher("login.jsp").forward(request, response);

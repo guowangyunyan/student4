@@ -24,6 +24,7 @@ public class Page<T> {
 		this.totalPage = (totalRecord + pageSize - 1) / pageSize;
 		// 开始索引
 		this.startIndex = (currentPage - 1) * pageSize;
+
 	}
 
 	public Integer getCurrentPage() {

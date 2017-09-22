@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主页面</title>
-<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$("#query").on("click",function(){
@@ -26,7 +28,7 @@
 	姓名:<input type="text" name="queryName" value="${studentName }"/>&nbsp;&nbsp;
 	性别:<input type="radio" ${sex==1?'checked':'' } name="sex" value="1"/>男
 	<input type="radio" ${sex==0?'checked':'' } name="sex" value="0"/>女
-	<input type="radio" ${sex==2?'checked':'' } name="sex" value="2" />全部
+	<input type="radio" ${sex==2?'checked':'' } name="sex" value="2" checked/>全部
 	<a id="query" >查询</a>
 	<div>
 		<a href="add.jsp">添加学生信息</a>
@@ -58,7 +60,7 @@
 					
 					<c:if test="${stu.sex==0 }">女</c:if>
 					</td>
-					<td>${stu.birthday }</td>
+					
 					<td>${stu.createDate }</td>
 					<td>${stu.updateDate }</td>
 					<td><a href="student?act=showStu&studentId=${stu.studentId  }">修改</a></td>
