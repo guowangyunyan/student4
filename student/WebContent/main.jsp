@@ -74,14 +74,14 @@
 	 	<option value="5">5</option>
 	 	<option value="10">10</option>
 	 </select>
-	 <a href="student?act=query&currentPage=1">首页</a>
+	 <a href="student?currentPage=1">首页</a>
 	 <c:if test="${page.currentPage >1 }">
-		<a href="student?act=query&currentPage=${page.currentPage -1 }">上一页</a>
+		<a href="student?currentPage=${page.currentPage -1 }">上一页</a>
 	 </c:if>
 	 ${page.currentPage }
 	 <c:if test="${page.currentPage <page.totalPage }">
-		<a href="student?act=query&currentPage=${page.currentPage +1 }">下一页</a>
+		<a href="student?currentPage=${page.currentPage +1 }">下一页</a>
 	 </c:if>
-	 <a href="student?act=query&currentPage=${page.totalPage}">尾页</a>
+	 <a href="student?currentPage=${page.totalPage}">尾页</a>
 </body>
 </html>
